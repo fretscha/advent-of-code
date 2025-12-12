@@ -28,8 +28,8 @@ def part2() -> int:
 
 
 if __name__ == "__main__":
-    DEBUG = os.getenv("DEBUG", "False").lower() in ("true", "1", "t")
-
+    DEBUG = os.environ.get("DEBUG", "").lower() in ("1", "t", "true")
+    
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger("{{year}}-{{day}}")
 

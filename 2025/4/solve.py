@@ -22,7 +22,7 @@ def count_adjacent_rolls(grid: list[str], row: int, col: int) -> int:
 
         # Check bounds
         if 0 <= new_row < len(grid) and 0 <= new_col < len(grid[new_row]):
-            if grid[new_row][new_col] == '@':
+            if grid[new_row][new_col] == "@":
                 count += 1
 
     return count
@@ -39,7 +39,7 @@ def part1(lines: list[str]) -> int:
 
     for row in range(len(lines)):
         for col in range(len(lines[row])):
-            if lines[row][col] == '@':
+            if lines[row][col] == "@":
                 adjacent_rolls = count_adjacent_rolls(lines, row, col)
                 if adjacent_rolls < 4:
                     accessible_count += 1
@@ -63,8 +63,8 @@ def part2(lines: list[str]) -> int:
         accessible = []
         for row in range(len(grid)):
             for col in range(len(grid[row])):
-                if grid[row][col] == '@':
-                    adjacent_rolls = count_adjacent_rolls([''.join(r) for r in grid], row, col)
+                if grid[row][col] == "@":
+                    adjacent_rolls = count_adjacent_rolls(["".join(r) for r in grid], row, col)
                     if adjacent_rolls < 4:
                         accessible.append((row, col))
 
@@ -74,7 +74,7 @@ def part2(lines: list[str]) -> int:
 
         # Remove all accessible rolls
         for row, col in accessible:
-            grid[row][col] = '.'
+            grid[row][col] = "."
             total_removed += 1
 
         logger.debug(f"Removed {len(accessible)} rolls this iteration. Total: {total_removed}")
@@ -83,7 +83,7 @@ def part2(lines: list[str]) -> int:
 
 
 if __name__ == "__main__":
-    DEBUG = os.getenv("DEBUG", "False").lower() in ("true", "1", "t")
+    DEBUG = os.environ.get("DEBUG", "").lower() in ("1", "t", "true")
 
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger("2025-4")

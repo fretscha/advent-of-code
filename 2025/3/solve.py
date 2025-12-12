@@ -91,7 +91,7 @@ def part2(lines: list[str]) -> int:
 
 
 if __name__ == "__main__":
-    DEBUG = os.getenv("DEBUG", "False").lower() in ("true", "1", "t")
+    DEBUG = os.environ.get("DEBUG", "").lower() in ("1", "t", "true")
     print(f"DEBUG={DEBUG}")
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger("2025-3")
