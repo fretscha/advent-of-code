@@ -41,13 +41,53 @@ def part1(lines: list[str]) -> int:
     return total
 
 
+def find_max_joltage_n(bank: str, n: int) -> int:
+    """Find the maximum joltage from a bank by selecting exactly n batteries"""
+    # We want to select n digits that form the largest number
+    # Strategy: greedily select the largest digit at each position
+    # that still leaves enough digits remaining
+
+    result = []
+    remaining_needed = n
+    start_pos = 0
+
+    for _ in range(n):
+        # We need to leave enough digits after this selection
+        # to complete the remaining selections
+        max_digit = -1
+        max_pos = -1
+
+        # Look through positions where we can still select remaining_needed digits
+        end_pos = len(bank) - remaining_needed + 1
+
+        for i in range(start_pos, end_pos):
+            digit = int(bank[i])
+            if digit > max_digit:
+                max_digit = digit
+                max_pos = i
+
+        result.append(str(max_digit))
+        logger.debug(f"Selected digit {max_digit} from position {max_pos}")
+        start_pos = max_pos + 1
+        remaining_needed -= 1
+
+    return int("".join(result))
+
+
 def part2(lines: list[str]) -> int:
     """
-    Compute part 2 solution.
+    Find the total output joltage by selecting exactly 12 batteries from each bank.
     Returns:
         _type_: int
     """
-    return 0
+    total = 0
+    for bank in lines:
+        if bank:  # Skip empty lines
+            max_joltage = find_max_joltage_n(bank, 12)
+            logger.debug(f"Bank {bank[:20]}...: max 12-digit joltage = {max_joltage}")
+            total += max_joltage
+
+    return total
 
 
 if __name__ == "__main__":
