@@ -1,5 +1,6 @@
 # https://adventofcode.com/{{year}}/day/{{day}}
 import logging
+import os
 
 def read_input(filename: str) -> list[any]:
     """Read the input file and return lines"""
