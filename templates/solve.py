@@ -1,5 +1,5 @@
 # https://adventofcode.com/{{year}}/day/{{day}}
-
+import logging
 
 def read_input(filename: str) -> list[any]:
     """Read the input file and return lines"""
@@ -27,12 +27,21 @@ def part2() -> int:
 
 
 if __name__ == "__main__":
-    lines = read_input("{{year}}/{{day}}/input.txt")
+    DEBUG = os.getenv("DEBUG", "False").lower() in ("true", "1", "t")
+
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger("{{year}}-{{day}}")
+
+    if DEBUG:
+        logger.setLevel(logging.DEBUG)
+        lines = read_input("{{year}}/{{day}}/input_test.txt")
+    else:
+        lines = read_input("{{year}}/{{day}}/input.txt")
 
     # Part 1
     result1 = part1(lines)
-    print(f"Part 1: {result1}")
+    logger.info(f"Part 1: {result1}")
 
     # Part 2
     result2 = part2(lines)
-    print(f"Part 2: {result2}")
+    logger.info(f"Part 2: {result2}")
