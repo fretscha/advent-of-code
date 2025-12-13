@@ -69,3 +69,8 @@ skip-magic-trailing-comma = false
 
 # Like Black, automatically detect the appropriate line ending.
 line-ending = "auto"  
+
+[dependency-groups]
+dev = [
+    "notebook>=7.5.0",
+]
